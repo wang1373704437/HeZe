@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.linkct.hzdlzcgl.NewScanningActivity">
+
+    <me.dm7.barcodescanner.zbar.ZBarScannerView
+        app:maskColor="#33ffffff"
+        app:borderColor="@color/color1"
+        app:laserColor="@color/color1"
+        android:id="@+id/zbar_sv1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></me.dm7.barcodescanner.zbar.ZBarScannerView>
+    <TextView
+        android:padding="3dp"
+        android:layout_marginTop="160dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="将二维码放入框内，即开始扫描"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/scanning_bg"
+        />
+</FrameLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:minHeight="48dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/iv_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/back"
+            />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/iv_back"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:text="变电站1"
+            />
+    </RelativeLayout>
+    <View
+        android:background="@color/colortLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

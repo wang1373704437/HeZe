@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">设备信息</string>
+    <string name="tab_title1">设备厂家</string>
+    <string name="tab_title2">定值单</string>
+    <string name="tab_title3">工作票</string>
+    <string name="tab_title4">操作票</string>
+    <string name="tab_title5">检修记录</string>
+    <string name="title_activity_image_look">ImageLookActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+</resources>

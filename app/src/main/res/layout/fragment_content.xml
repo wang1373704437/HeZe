@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="48dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bn_item1"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="设备基础信息"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bn_item2"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25sp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="检修记录"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bn_item3"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="操作记录"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bn_item4"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25sp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="定值单"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bn_item5"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="设备图纸资料"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bn_item6"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25sp"
+            android:background="@drawable/equipment_item_bg"
+            android:gravity="center"
+            android:text="其他"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

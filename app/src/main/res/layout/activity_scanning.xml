@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchMatch">
+
+    <!--<cn.bingoogolapple.qrcode.zbar.ZBarView-->
+        <!--android:id="@+id/zbarview"-->
+        <!--style="@style/MatchMatch"-->
+        <!--app:qrcv_animTime="1000"-->
+        <!--app:qrcv_barCodeTipText="将二维码放入框内，即可自动扫描"-->
+        <!--app:qrcv_barcodeRectHeight="140dp"-->
+        <!--app:qrcv_borderColor="#ff9900"-->
+        <!--app:qrcv_borderSize="1dp"-->
+        <!--app:qrcv_cornerColor="@color/colorPrimaryDark"-->
+        <!--app:qrcv_cornerLength="20dp"-->
+        <!--app:qrcv_cornerSize="3dp"-->
+        <!--app:qrcv_customGridScanLineDrawable="@mipmap/qrcode_default_grid_scan_line"-->
+        <!--app:qrcv_isBarcode="false"-->
+        <!--app:qrcv_isCenterVertical="false"-->
+        <!--app:qrcv_isOnlyDecodeScanBoxArea="false"-->
+        <!--app:qrcv_isShowDefaultGridScanLineDrawable="true"-->
+        <!--app:qrcv_isShowDefaultScanLineDrawable="true"-->
+        <!--app:qrcv_isShowTipBackground="true"-->
+        <!--app:qrcv_isShowTipTextAsSingleLine="false"-->
+        <!--app:qrcv_isTipTextBelowRect="false"-->
+        <!--app:qrcv_maskColor="#33FFFFFF"-->
+        <!--app:qrcv_qrCodeTipText="将二维码放入框内，即可自动扫描"-->
+        <!--app:qrcv_rectWidth="250dp"-->
+        <!--app:qrcv_scanLineColor="@color/colorPrimaryDark"-->
+        <!--app:qrcv_toolbarHeight="156dp"-->
+        <!--app:qrcv_topOffset="90dp"/>-->
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/tv_flash"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/light_def"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        />
+</RelativeLayout>
