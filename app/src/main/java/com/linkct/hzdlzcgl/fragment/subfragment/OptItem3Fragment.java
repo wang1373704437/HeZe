@@ -91,6 +91,8 @@ public class OptItem3Fragment extends SupportFragment {
         adapter = new ThirdlyAdapter(getActivity(), czpList);
         lv_second.setAdapter(adapter);
 
+         TextView emptyView= (TextView) view.findViewById(R.id.tv_listview_empty);
+         lv_second.setEmptyView(emptyView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

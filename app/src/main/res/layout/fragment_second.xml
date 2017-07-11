@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
     android:background="@color/color5"
+    android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -34,19 +33,18 @@
 
         <SearchView
             android:id="@+id/sv_search"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_width="210dp"
-
-            android:queryHint="请输入关键字"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+
             android:iconifiedByDefault="false"
             android:inputType="text"
-          />
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:queryHint="请输入关键字" />
 
 
     </RelativeLayout>
@@ -55,10 +53,14 @@
         android:id="@+id/lv_second"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:cacheColorHint="#00000000"
         android:divider="@color/color5"
-        android:dividerHeight="8dp"
-        android:layout_margin="10dp">
-    </ListView>
+        android:dividerHeight="8dp"></ListView>
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/il_empty"
+        layout="@layout/listview_empty"></include>
 </LinearLayout>

@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void subscribe(ObservableEmitter<String> e) throws Exception {
                     FileUtils.initPath();
+                    clearImageDiskCache(getApplication());
 
                     CsvUtils.getCSV(getApplicationContext(),dbPath,mtLogPath,optPath,svmPath);
-//                    clearImageDiskCache(getApplication());
                     Log.e(TAG, "运行在什么线程" + Thread.currentThread().getName());
                     e.onNext("action");
                     Thread.sleep(1500);

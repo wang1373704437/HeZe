@@ -8,7 +8,6 @@ import com.linkct.hzdlzcgl.dao.UserDao;
 import com.linkct.hzdlzcgl.domain.CzpInfo;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.domain.DzdInfo;
-import com.linkct.hzdlzcgl.domain.GzpInfo;
 import com.linkct.hzdlzcgl.domain.WxjlInfo;
 
 import java.io.BufferedReader;
@@ -18,7 +17,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -252,68 +250,68 @@ public class CsvUtils {
             , "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg"
             , "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg"};
 
-    public static void getCSVDzd(Context context) {
-        List<DzdInfo> list = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            DzdInfo data = new DzdInfo();
-            data.setDzdSerial("0x000" + i);
-            data.setDzdTime("" + System.currentTimeMillis());
-            data.setDzdPeople("张三" + i);
-            data.setUuid("" + ((i % 3) + 1));
-
-            list.add(data);
-        }
-        MyDateDao myDao = new MyDateDao(context);
-        myDao.insertdzd(list);
-
-
-        List<GzpInfo> list2 = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            GzpInfo data = new GzpInfo();
-            data.setGzp_uuid(CommonUtils.getUUID());
-            data.setGzpPeople("工作票张三" + i);
-            data.setGzpTime("" + System.currentTimeMillis());
-            data.setGzpContent("工作票内容我有很多个字？？代码昆明…………*&&…" +
-                    "…&……&……&……&··，，,,,,dasd" + i);
-            data.setUuid("" + ((i % 3) + 1));
-            List<String> imagelist = new ArrayList<>();
-            for (int k = 0; k < i % 18; k++) {
-                imagelist.add(imgs[k]);
-            }
-            data.setGzpImage(imagelist);
-
-            list2.add(data);
-        }
-        myDao.insertGZP(list2);
-
-
-        List<CzpInfo> list3 = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            CzpInfo data = new CzpInfo();
-            data.setCzpPeople("操作票李四" + i);
-            data.setCzpTime(System.currentTimeMillis() + "");
-            data.setCzpContent("操作票内容我有很多个字？？代码昆明…………*&&…" +
-                    "…&……&……&……&··，，,,,,dasd" + i);
-            data.setUuid("" + ((i % 3) + 1));
-            list3.add(data);
-        }
-        myDao.insertCZP(list3);
-
-
-        List<WxjlInfo> list4 = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            WxjlInfo data = new WxjlInfo();
-            data.setWxPeople("维修员周星驰" + i);
-            data.setWxTime(System.currentTimeMillis() + "");
-            data.setWxContent("操作票内容我有很多个字？？代码昆明…………*&&…" +
-                    "…&……&……&……&··，，,,,,dasd" + i);
-            data.setUuid("" + ((i % 3) + 1));
-            list4.add(data);
-        }
-        myDao.insertWX(list4);
-
-
-    }
+//    public static void getCSVDzd(Context context) {
+//        List<DzdInfo> list = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            DzdInfo data = new DzdInfo();
+//            data.setDzdSerial("0x000" + i);
+//            data.setDzdTime("" + System.currentTimeMillis());
+//            data.setDzdPeople("张三" + i);
+//            data.setUuid("" + ((i % 3) + 1));
+//
+//            list.add(data);
+//        }
+//        MyDateDao myDao = new MyDateDao(context);
+//        myDao.insertdzd(list);
+//
+//
+//        List<GzpInfo> list2 = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            GzpInfo data = new GzpInfo();
+//            data.setGzp_uuid(CommonUtils.getUUID());
+//            data.setGzpPeople("工作票张三" + i);
+//            data.setGzpTime("" + System.currentTimeMillis());
+//            data.setGzpContent("工作票内容我有很多个字？？代码昆明…………*&&…" +
+//                    "…&……&……&……&··，，,,,,dasd" + i);
+//            data.setUuid("" + ((i % 3) + 1));
+//            List<String> imagelist = new ArrayList<>();
+//            for (int k = 0; k < i % 18; k++) {
+//                imagelist.add(imgs[k]);
+//            }
+//            data.setGzpImage(imagelist);
+//
+//            list2.add(data);
+//        }
+//        myDao.insertGZP(list2);
+//
+//
+//        List<CzpInfo> list3 = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            CzpInfo data = new CzpInfo();
+//            data.setCzpPeople("操作票李四" + i);
+//            data.setCzpTime(System.currentTimeMillis() + "");
+//            data.setCzpContent("操作票内容我有很多个字？？代码昆明…………*&&…" +
+//                    "…&……&……&……&··，，,,,,dasd" + i);
+//            data.setUuid("" + ((i % 3) + 1));
+//            list3.add(data);
+//        }
+//        myDao.insertCZP(list3);
+//
+//
+//        List<WxjlInfo> list4 = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            WxjlInfo data = new WxjlInfo();
+//            data.setWxPeople("维修员周星驰" + i);
+//            data.setWxTime(System.currentTimeMillis() + "");
+//            data.setWxContent("操作票内容我有很多个字？？代码昆明…………*&&…" +
+//                    "…&……&……&……&··，，,,,,dasd" + i);
+//            data.setUuid("" + ((i % 3) + 1));
+//            list4.add(data);
+//        }
+//        myDao.insertWX(list4);
+//
+//
+//    }
 
 
 }

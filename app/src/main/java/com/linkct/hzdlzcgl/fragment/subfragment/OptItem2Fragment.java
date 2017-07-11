@@ -91,7 +91,8 @@ public class OptItem2Fragment extends SupportFragment {
 
         adapter = new SecondAdapter(getActivity(), wxList);
         lv_second.setAdapter(adapter);
-
+        TextView emptyView= (TextView) view.findViewById(R.id.tv_listview_empty);
+        lv_second.setEmptyView(emptyView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
