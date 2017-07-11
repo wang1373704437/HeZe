@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 import com.linkct.hzdlzcgl.R;
 import com.linkct.hzdlzcgl.adapter.MenuAdapter;
+import com.linkct.hzdlzcgl.dao.UserDao;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.listener.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
@@ -36,6 +38,8 @@ public class MenuListFragment extends SupportFragment {
     private int mCurrentPosition = -1;
     private TextView tv_title;
     private ImageView iv_back;
+    private DataInfo mFirstNode;
+    private List<DataInfo> parentList;
 
     public static MenuListFragment newInstance(ArrayList<DataInfo> menus) {
 
@@ -71,7 +75,10 @@ public class MenuListFragment extends SupportFragment {
     }
 
     private void initView(View view) {
-        mRecy = (RecyclerView) view.findViewById(R.id.recy);
+        mFirstNode=mMenus.get(0);
+        UserDao userDao=new UserDao(_mActivity);
+        parentList=userDao.listByDataInfoIdByUUid(mFirstNode.getPid());
+                mRecy = (RecyclerView) view.findViewById(R.id.recy);
         tv_title = (TextView) view.findViewById(R.id.tv_title);
         iv_back = (ImageView) view.findViewById(R.id.iv_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +87,10 @@ public class MenuListFragment extends SupportFragment {
                 getActivity().finish();
             }
         });
-        if (mMenus != null && mMenus.size() > 0) {
-            tv_title.setText("" + mMenus.get(0).getPname()==null?"":mMenus.get(0).getPname());
+        if (parentList != null && parentList.size() > 0) {
+            tv_title.setText("" + parentList.get(0).getEquipment_name()==null?"":parentList.get(0).getEquipment_name());
+        }else{
+            tv_title.setText("");
         }
     }
 

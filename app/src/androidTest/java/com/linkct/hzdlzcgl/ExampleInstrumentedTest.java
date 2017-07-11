@@ -70,8 +70,6 @@ public class ExampleInstrumentedTest {
         data2.setSuppliermf("设备厂家222222222222222222222222222222222222222222222222");
         data2.setSuppliercontact("张三");
         data2.setSupplierphone("1008602222222222");
-        data2.setSupptextAll("图文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍文资料介绍");
-        data2.setNote("备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路备忘开路");
         user.add(data2);
         List<DataInfo> list = user.listByDataInfoIdByUUid("g_1");
         Log.e("ExampleInstrumentedTest","============"+list.get(0).toString());
@@ -127,6 +125,5 @@ public class ExampleInstrumentedTest {
         }
         user.addDzdList(dzdList);
 
-        assertEquals(6, list.size());
     }
 }

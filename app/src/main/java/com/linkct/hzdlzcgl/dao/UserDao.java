@@ -66,6 +66,22 @@ public class UserDao {
         }
     }
 
+    public void addDataList(final List<DataInfo> list) {
+        try {
+            TransactionManager.callInTransaction(helper.getConnectionSource(),
+                    new Callable<Void>() {
+                        @Override
+                        public Void call() throws Exception {
+                            for (DataInfo wx : list) {
+                                dataInfoDaoOpe.createOrUpdate(wx);
+                            }
+                            return null;
+                        }
+                    });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param uuid
      * @return

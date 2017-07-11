@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_tips;
     private MyDateDao mDao;
     private String dbPath;//资源文件路径
+    private String mtLogPath;
+    private String optPath;
+    private String svmPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         initView();
-        dbPath=FileUtils.DB_PATH+"data.csv";
+        dbPath=FileUtils.DB_PATH+"equipment.csv";//设备信息
+        mtLogPath=FileUtils.DB_PATH+"mtLog.csv";//维修记录
+        optPath=FileUtils.DB_PATH+"opt.csv";//操作记录
+        svmPath=FileUtils.DB_PATH+"svm.csv";//定值单
+
+
         updateDate = CsvUtils.getVersion(getApplicationContext(),dbPath);
+        Log.e("CsvUtils","资源文件****====="+dbPath);
         if (updateDate) {
 //            rl_update_data.setVisibility(View.GONE);
             Observable.create(new ObservableOnSubscribe<String>() {
@@ -48,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void subscribe(ObservableEmitter<String> e) throws Exception {
                     FileUtils.initPath();
 
-                    CsvUtils.getCSV(getApplicationContext(),dbPath);
-                    CsvUtils.getCSVDzd(getApplicationContext());
-
+                    CsvUtils.getCSV(getApplicationContext(),dbPath,mtLogPath,optPath,svmPath);
 //                    clearImageDiskCache(getApplication());
                     Log.e(TAG, "运行在什么线程" + Thread.currentThread().getName());
                     e.onNext("action");

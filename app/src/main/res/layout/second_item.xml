@@ -121,4 +121,12 @@
         android:text="检修内容："
         android:textSize="15sp" />
 
+    <!--<me.codeboy.android.aligntextview.AlignTextView-->
+        <!--android:id="@+id/tv_wxjl_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="7dp"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:text="检修内容："-->
+        <!--android:textSize="15sp" />-->
 </LinearLayout>

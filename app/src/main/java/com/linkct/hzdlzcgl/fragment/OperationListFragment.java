@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.linkct.hzdlzcgl.R;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem1Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem2Fragment;
+import com.linkct.hzdlzcgl.fragment.subfragment.OptItem3Fragment;
+import com.linkct.hzdlzcgl.fragment.subfragment.OptItem4Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem5Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem6Fragment;
 
@@ -102,12 +104,12 @@ public class OperationListFragment extends SupportFragment implements View.OnCli
                 break;
             case R.id.bn_item3:
                 if (getParentFragment() instanceof DataListFragment) {
-//                    ((DataListFragment) getParentFragment()).start(OptItem3Fragment.newInstance(uuid));
+                    ((DataListFragment) getParentFragment()).start(OptItem3Fragment.newInstance(uuid));
                 }
                 break;
             case R.id.bn_item4:
                 if (getParentFragment() instanceof DataListFragment) {
-//                    ((DataListFragment) getParentFragment()).start(OptItem4Fragment.newInstance(uuid));
+                    ((DataListFragment) getParentFragment()).start(OptItem4Fragment.newInstance(uuid));
                 }
                 break;
             case R.id.bn_item5:

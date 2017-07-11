@@ -13,7 +13,7 @@ public class FileUtils {
 
 
     public static String IMAGE_PATH = FILE_PATH + "images/";//
-    public static String DB_PATH = FILE_PATH + "db/";//
+    public static String DB_PATH = FILE_PATH + "data/";//
     public static String CACHE_PATH = FILE_PATH + "cache/";//
     public static void initPath() {
         File dbFile = new File(DB_PATH);

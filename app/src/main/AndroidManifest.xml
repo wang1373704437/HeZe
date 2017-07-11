@@ -25,9 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name=".ScanningActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <!-- <activity -->
+        <!-- android:name=".ScanningActivity" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".DataListActivity"
             android:screenOrientation="landscape" />
@@ -39,9 +39,10 @@
         <activity
             android:name=".TestActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".NewScanningActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".NewScanningActivity"
-            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

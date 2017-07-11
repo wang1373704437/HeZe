@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.io.File;
 
@@ -23,6 +24,7 @@ public class APP extends Application {
 
     public void onCreate() {
         super.onCreate();
+        ZXingLibrary.initDisplayOpinion(this);
         initImageLoader(getApplicationContext());
     }
 
