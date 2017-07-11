@@ -112,7 +112,7 @@ public class SecondAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(data.getWxSerial()))
                 holder.tv_wxjl3.setText(setKeyWordColor(data.getWxSerial(), key));
             else
-                holder.tv_wxjl2.setText("");
+                holder.tv_wxjl3.setText("");
 
             if (!TextUtils.isEmpty(context))
                 holder.tv_wxjl4.append(setKeyWordColor(context, key));
