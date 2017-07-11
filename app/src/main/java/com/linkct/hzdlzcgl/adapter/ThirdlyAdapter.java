@@ -97,6 +97,7 @@ public class ThirdlyAdapter extends BaseAdapter {
             holder.tv_wxjl4.setText(temp);
             holder.tv_wxjl4.append(context == null ? "" : context);
         } else {
+            holder.tv_wxjl1.setText(data.getCzpTime() == null ? "" : data.getCzpTime());
             holder.tv_wxjl4.setText(temp);
 
             if (!TextUtils.isEmpty(data.getCzpPeople()))

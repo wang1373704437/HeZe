@@ -87,7 +87,6 @@ public class OptItem5Fragment extends SupportFragment {
             }
         }
 
-
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

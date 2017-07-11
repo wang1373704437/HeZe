@@ -101,6 +101,7 @@ public class SecondAdapter extends BaseAdapter {
             holder.tv_wxjl4.setText(temp);
             holder.tv_wxjl4.append(context == null ? "" : context);
         } else {
+            holder.tv_wxjl1.setText(data.getWxTime() == null ? "" : data.getWxTime());
             holder.tv_wxjl4.setText(temp);
 
             if (!TextUtils.isEmpty(data.getWxPeople()))
@@ -116,7 +117,7 @@ public class SecondAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(context))
                 holder.tv_wxjl4.append(setKeyWordColor(context, key));
             else
-                holder.tv_wxjl2.append("");
+                holder.tv_wxjl4.append("");
         }
 
         return view;

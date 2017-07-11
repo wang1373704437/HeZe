@@ -94,6 +94,8 @@ public class FourthlyAdapter extends BaseAdapter {
             holder.tv_dzd3.setText(data.getDzdPeople() == null ? "" : data.getDzdPeople());
             holder.tv_dzd4.setText(data.getDzd_acceptance() == null ? "" : data.getDzd_acceptance());
         } else {
+
+            holder.tv_dzd1.setText(data.getDzdTime() == null ? "" : data.getDzdTime());
             if (!TextUtils.isEmpty(data.getDzdSerial()))
                 holder.tv_dzd2.setText(setKeyWordColor(data.getDzdSerial(), key));
             else
