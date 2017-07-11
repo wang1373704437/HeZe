@@ -8,6 +8,7 @@ import com.linkct.hzdlzcgl.dao.UserDao;
 import com.linkct.hzdlzcgl.domain.CzpInfo;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.domain.DzdInfo;
+import com.linkct.hzdlzcgl.domain.ImageInfo;
 import com.linkct.hzdlzcgl.domain.WxjlInfo;
 
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -115,6 +117,18 @@ public class CsvUtils {
                     data.setNote(arr[9]);
                     data.setPname("");
                     data.setSupptextAll("");
+
+                    List<ImageInfo>  mImageList=new ArrayList<>();
+                    for(int m=10;m<arr.length;m++){
+                        ImageInfo image=new ImageInfo();
+                        image.setUuid(data.getUuid());
+                        String path=arr[m];
+                        if (path.equals("*"))
+                            continue;
+                        image.setPath(path);
+                        mImageList.add(image);
+                    }
+                    user.addImageList(mImageList);
                     lists.add(data);
                 }
             }
