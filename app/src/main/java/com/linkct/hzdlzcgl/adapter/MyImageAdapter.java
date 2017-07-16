@@ -3,6 +3,8 @@ package com.linkct.hzdlzcgl.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +17,7 @@ import com.bm.library.Info;
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.linkct.hzdlzcgl.ImageLookActivity;
+import com.linkct.hzdlzcgl.ImageLookNewActivity;
 import com.linkct.hzdlzcgl.R;
 import com.linkct.hzdlzcgl.domain.ImageInfo;
 import com.linkct.hzdlzcgl.utils.AppToast;
@@ -22,7 +25,11 @@ import com.linkct.hzdlzcgl.utils.FileUtils;
 import com.linkct.hzdlzcgl.utils.ViewUtils;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.id.list;
 
 /**
  * Created by wlh on 2017/7/1.
@@ -49,7 +56,7 @@ public class MyImageAdapter extends RecyclerView.Adapter<MyImageAdapter.ViewHold
 
     //将数据绑定到子View，会自动复用View
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
         final String imagePath=FileUtils.IMAGE_PATH + data.get(i).getPath();
         File file = new File(imagePath);
         Log.e("MyImageAdapter","文件大小："+(file.exists()?file.length():""));
@@ -59,11 +66,16 @@ public class MyImageAdapter extends RecyclerView.Adapter<MyImageAdapter.ViewHold
                             ViewUtils.dp2px(90, context))
 //                .transform(new GlideRoundTransform(context,20))
                     .thumbnail(0.001f).into(viewHolder.imageView);
-        }else {
+        }else if(file.exists()){
             Glide.with(context).load(file).placeholder(R.drawable.image_group_default)
                     .override(ViewUtils.dp2px(120, context),
                             ViewUtils.dp2px(90, context))
 //                .transform(new GlideRoundTransform(context,20))
+                    .thumbnail(0.1f).into(viewHolder.imageView);
+        }else{
+            Glide.with(context).load(R.drawable.image_group_default)
+                    .override(ViewUtils.dp2px(120, context),
+                            ViewUtils.dp2px(90, context))
                     .thumbnail(0.1f).into(viewHolder.imageView);
         }
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +84,12 @@ public class MyImageAdapter extends RecyclerView.Adapter<MyImageAdapter.ViewHold
                 if(TextUtils.isEmpty(imagePath)){
                     AppToast.showShortText(context,"未能识别的图片");
                 }else{
-                    Intent intent=new Intent(context, ImageLookActivity.class);
+                    Intent intent=new Intent(context, ImageLookNewActivity.class);
                      info = PhotoView.getImageViewInfo(viewHolder.imageView);
-                    intent.putExtra("imagePath",imagePath);
+                    intent.putExtra("index",i);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("list", (Serializable) data);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                     ((Activity) context)
                             .overridePendingTransition(0, 0);

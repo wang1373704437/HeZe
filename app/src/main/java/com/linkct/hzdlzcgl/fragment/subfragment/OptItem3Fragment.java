@@ -3,6 +3,7 @@ package com.linkct.hzdlzcgl.fragment.subfragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,18 +103,18 @@ public class OptItem3Fragment extends SupportFragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//                adapter.setKey(newText);
-//                if(TextUtils.isEmpty(newText)){
-//                    adapter.refreshData(czpList);
-//                }else{
-//                    List<CzpInfo> tempList=new ArrayList<>();
-//                    for(CzpInfo cz:czpList){
-//                        if(cz.search(newText)){
-//                            tempList.add(cz);
-//                        }
-//                    }
-//                    adapter.refreshData(tempList);
-//                }
+                adapter.setKey(newText);
+                if(TextUtils.isEmpty(newText)){
+                    adapter.refreshData(czpList);
+                }else{
+                    List<CzpInfo> tempList=new ArrayList<>();
+                    for(CzpInfo cz:czpList){
+                        if(cz.search(newText)){
+                            tempList.add(cz);
+                        }
+                    }
+                    adapter.refreshData(tempList);
+                }
                 return false;
             }
         });

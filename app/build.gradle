@@ -45,5 +45,6 @@ dependencies {
     compile 'me.dm7.barcodescanner:zbar:1.9.3'
     compile 'cn.yipianfengye.android:zxing-library:2.2'
     compile 'me.codeboy.android:align-text-view:2.3.0'
+    compile 'me.relex:circleindicator:1.2.2@aar'
     testCompile 'junit:junit:4.12'
 }

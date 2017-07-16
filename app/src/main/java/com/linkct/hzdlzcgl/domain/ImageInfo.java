@@ -3,11 +3,13 @@ package com.linkct.hzdlzcgl.domain;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by wlh on 2017/7/5.
  */
 @DatabaseTable(tableName = "tb_image")
-public class ImageInfo {
+public class ImageInfo implements Serializable {
 
     public ImageInfo() {
     }

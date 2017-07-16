@@ -24,10 +24,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public class OptItem1Fragment extends SupportFragment implements View.OnClickListener{
     private static final String ARG_NUMBER = "arg_number";
-
-    private Toolbar mToolbar;
-    private TextView mTvName;
-    private Button mBtnNext, mBtnNextWithFinish;
+    
     private ImageView iv_back;
     private String mNumber;
     private TextView tv_sp1;

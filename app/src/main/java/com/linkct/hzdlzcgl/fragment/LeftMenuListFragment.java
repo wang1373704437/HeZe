@@ -11,10 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.linkct.hzdlzcgl.R;
+import com.linkct.hzdlzcgl.adapter.Constant;
+import com.linkct.hzdlzcgl.adapter.LeftMenuAdapter;
 import com.linkct.hzdlzcgl.adapter.MenuAdapter;
+import com.linkct.hzdlzcgl.app.APP;
 import com.linkct.hzdlzcgl.dao.UserDao;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.listener.OnItemClickListener;
+import com.linkct.hzdlzcgl.utils.AppToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,26 +31,29 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by wlh on 2017/7/5.
  */
 
-public class MenuListFragment extends SupportFragment {
+public class LeftMenuListFragment extends SupportFragment {
     private static final String ARG_MENUS = "arg_menus";
+    private static final String ARG_UUID = "arg_uuid";
     private static final String SAVE_STATE_POSITION = "save_state_position";
 
     private RecyclerView mRecy;
-    private MenuAdapter mAdapter;
+    private LeftMenuAdapter mAdapter;
 
-    private ArrayList<DataInfo> mMenus;
+    private String mMenus;
     private int mCurrentPosition = -1;
     private TextView tv_title;
     private ImageView iv_back;
     private DataInfo mFirstNode;
     private List<DataInfo> parentList;
+    private UserDao userDao;
+    private String currentUUId;
 
-    public static MenuListFragment newInstance(ArrayList<DataInfo> menus) {
+    public static LeftMenuListFragment newInstance(String menus,String uuid) {
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_MENUS, menus);
-
-        MenuListFragment fragment = new MenuListFragment();
+        args.putString(ARG_MENUS, menus);
+        args.putString(ARG_UUID, menus);
+        LeftMenuListFragment fragment = new LeftMenuListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,14 +64,15 @@ public class MenuListFragment extends SupportFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            mMenus = (ArrayList<DataInfo>) args.getSerializable(ARG_MENUS);
+            mMenus = args.getString(ARG_MENUS);
+            currentUUId = args.getString(ARG_UUID);
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_left, container, false);
         initView(view);
         return view;
     }
@@ -75,27 +83,19 @@ public class MenuListFragment extends SupportFragment {
     }
 
     private void initView(View view) {
-        mFirstNode=mMenus.get(0);
-        UserDao userDao=new UserDao(_mActivity);
-        parentList=userDao.listByDataInfoIdByUUid(mFirstNode.getPid());
+        userDao=new UserDao(_mActivity);
+
+
+
         mRecy = (RecyclerView) view.findViewById(R.id.recy);
-        tv_title = (TextView) view.findViewById(R.id.tv_title);
         iv_back = (ImageView) view.findViewById(R.id.iv_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                getActivity().finish();
-
-                LeftMenuListFragment fragment = LeftMenuListFragment.newInstance(mFirstNode.getPid(),mFirstNode.getUuid());
-                ((DataListFragment) getParentFragment()).switchLeftFragment(fragment);
+                getActivity().finish();
             }
 
         });
-        if (parentList != null && parentList.size() > 0) {
-            tv_title.setText("" + parentList.get(0).getEquipment_name()==null?"":parentList.get(0).getEquipment_name());
-        }else{
-            tv_title.setText("");
-        }
     }
 
     @Override
@@ -104,9 +104,19 @@ public class MenuListFragment extends SupportFragment {
 
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecy.setLayoutManager(manager);
-        mAdapter = new MenuAdapter(_mActivity);
+        mAdapter = new LeftMenuAdapter(_mActivity);
         mRecy.setAdapter(mAdapter);
-        mAdapter.setDatas(mMenus);
+
+        parentList=userDao.listByDataInfoIdbyPid("0");
+
+        for(DataInfo node:parentList){
+            List<DataInfo> tempList = userDao.listByDataInfoIdbyPid(node.getUuid());
+            node.setType(Constant.GROUP);
+            if(tempList!=null&&tempList.size()>0){
+                node.addChildren(tempList);
+            }
+        }
+        mAdapter.setDatas(parentList);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -115,30 +125,43 @@ public class MenuListFragment extends SupportFragment {
             }
         });
 
-        if (savedInstanceState != null) {
-            mCurrentPosition = savedInstanceState.getInt(SAVE_STATE_POSITION);
-            mAdapter.setItemChecked(mCurrentPosition);
-        } else {
-            mCurrentPosition = 0;
-            mAdapter.setItemChecked(0);
+        String currentUUid = mMenus;
+        int count=0;
+        for(DataInfo node:parentList) {
+            if(node.getUuid().equals(currentUUid)){
+                break;
+            }
+            count++;
         }
+        if(parentList!=null&&count<parentList.size()) {
+            mAdapter.setItemChecked(count);
+            mAdapter.controllerItem(parentList.get(count));
+        }
+
     }
 
     private void showContent(int position) {
-        if (position == mCurrentPosition) {
-            return;
+
+
+        if (mAdapter.getAlls().get(position).getType()==Constant.GROUP){
+            mAdapter.controllerItem(mAdapter.getAlls().get(position));
+        }else{
+            String uuid=mAdapter.getAlls().get(position).getUuid();
+            ArrayList<DataInfo> listMenus = new ArrayList<>();
+            List<DataInfo> listMenus1 = userDao.listByDataInfoIdByUUid(mAdapter.getAlls().get(position).getUuid());
+            List<DataInfo> listMenus2 = userDao.listByDataInfoIdbyPid(mAdapter.getAlls().get(position).getUuid());
+
+            listMenus.addAll(listMenus1);
+            listMenus.addAll(listMenus2);
+            MenuListFragment fragment = MenuListFragment.newInstance(listMenus);
+            ((DataListFragment) getParentFragment()).switchMenuFragment(fragment);
+
+            ((DataListFragment) getParentFragment()).switchOperaFragmentNew(uuid);
         }
 
         mCurrentPosition = position;
 
         mAdapter.setItemChecked(position);
-        if (position == 0) {
-            OperationListFragment operfragment = OperationListFragment.newInstance(mMenus.get(position).getUuid());
-            ((DataListFragment) getParentFragment()).switchOperaFragment(operfragment);
-        } else {
-            ContentFragment fragment = ContentFragment.newInstance(mMenus.get(position).getUuid());
-            ((DataListFragment) getParentFragment()).switchContentFragment(fragment);
-        }
     }
 
     @Override

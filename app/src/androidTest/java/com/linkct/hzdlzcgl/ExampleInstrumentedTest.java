@@ -17,6 +17,7 @@ import com.linkct.hzdlzcgl.utils.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +125,7 @@ public class ExampleInstrumentedTest {
             dzdList.add(cz);
         }
         user.addDzdList(dzdList);
+//        File[] roots = File.listRoots();
 
     }
 }

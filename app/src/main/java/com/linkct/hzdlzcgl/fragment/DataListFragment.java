@@ -94,4 +94,39 @@ public class DataListFragment extends SupportFragment {
             contentFragment.replaceFragment(fragment, true);
         }
     }
+
+
+    /**
+     * 替换加载 内容Fragment
+     *
+     * @param pid
+     */
+    public void switchOperaFragmentNew(String pid) {
+
+        OperationListFragment operationListFragment = OperationListFragment.newInstance(pid);
+        loadRootFragment(R.id.fl_content_container, operationListFragment);
+    }
+    /**
+     * 替换加载 内容Fragment
+     *
+     * @param fragment
+     */
+    public void switchLeftFragment(LeftMenuListFragment fragment) {
+        SupportFragment contentFragment = findChildFragment(MenuListFragment.class);
+        if (contentFragment != null) {
+            contentFragment.replaceFragment(fragment, true);
+        }
+    }
+
+    /**
+     * 替换加载 内容Fragment
+     *
+     * @param fragment
+     */
+    public void switchMenuFragment(MenuListFragment fragment) {
+        SupportFragment contentFragment = findChildFragment(LeftMenuListFragment.class);
+        if (contentFragment != null) {
+            contentFragment.replaceFragment(fragment, true);
+        }
+    }
 }

@@ -1,17 +1,27 @@
 package com.linkct.hzdlzcgl.domain;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static android.R.attr.type;
 
 /**
  * 设备信息主表
  * Created by wlh on 2017/6/30.
  */
 @DatabaseTable(tableName = "tb_data")
-public class DataInfo implements Serializable {
+public class DataInfo implements Serializable, Comparable<DataInfo>{
 
     public static final int imageType1 = 1;//定值单图片
     public static final int imageType2 = 2;//工作票图片
@@ -70,7 +80,7 @@ public class DataInfo implements Serializable {
     String note;//备忘字段
     @DatabaseField(columnName = "supptextAll")
     String supptextAll;//图纸资料介绍文字
-
+    int type;
     List<String> supplierImage;//设备资料对应的图片
     List<String> supplierText;//设备资料对应的介绍
 
@@ -221,4 +231,213 @@ public class DataInfo implements Serializable {
     public void setWxList(List<WxjlInfo> wxList) {
         this.wxList = wxList;
     }
+
+
+
+    public static final String NODES_ID_SEPARATOR = ":";
+
+    private int mId;
+    private int mLastId;
+    private DataInfo mParent;
+    private boolean mSelected;
+    private boolean mSelectable = true;
+    private  List<DataInfo> children = new ArrayList<>();;
+    private TreeNodeClickListener mClickListener;
+    private TreeNodeLongClickListener mLongClickListener;
+    private Object mValue;
+    private boolean mExpanded;
+    private int level;
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    public static DataInfo root() {
+        DataInfo root = new DataInfo(null);
+        root.setSelectable(false);
+        return root;
+    }
+
+    private int generateId() {
+        return ++mLastId;
+    }
+
+    public DataInfo(Object value) {
+
+        mValue = value;
+    }
+
+    public DataInfo addChild(DataInfo childNode) {
+        childNode.mParent = this;
+        childNode.mId = generateId();
+        children.add(childNode);
+        return this;
+    }
+
+    public DataInfo addChildren(DataInfo... nodes) {
+        for (DataInfo n : nodes) {
+            addChild(n);
+        }
+        return this;
+    }
+
+    public DataInfo addChildren(Collection<DataInfo> nodes) {
+        for (DataInfo n : nodes) {
+            addChild(n);
+        }
+        return this;
+    }
+
+    public int deleteChild(DataInfo child) {
+        for (int i = 0; i < children.size(); i++) {
+            if (child.mId == children.get(i).mId) {
+                children.remove(i);
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public List<DataInfo> getChildren() {
+        return Collections.unmodifiableList(children);
+    }
+
+    public int size() {
+        return children.size();
+    }
+
+    public DataInfo getParent() {
+        return mParent;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public boolean isLeaf() {
+        return size() == 0;
+    }
+
+    public Object getValue() {
+        return mValue;
+    }
+
+    public boolean isExpanded() {
+        return mExpanded;
+    }
+
+    public DataInfo setExpanded(boolean expanded) {
+        mExpanded = expanded;
+        return this;
+    }
+
+    public void setSelected(boolean selected) {
+        mSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return mSelectable && mSelected;
+    }
+
+    public void setSelectable(boolean selectable) {
+        mSelectable = selectable;
+    }
+
+    public boolean isSelectable() {
+        return mSelectable;
+    }
+
+    public String getPath() {
+        final StringBuilder path = new StringBuilder();
+        DataInfo node = this;
+        while (node.mParent != null) {
+            path.append(node.getId());
+            node = node.mParent;
+            if (node.mParent != null) {
+                path.append(NODES_ID_SEPARATOR);
+            }
+        }
+        return path.toString();
+    }
+
+
+    public int getLevel() {
+        int level = 0;
+        DataInfo root = this;
+        while (root.mParent != null) {
+            root = root.mParent;
+            level++;
+        }
+        return level;
+    }
+
+    public boolean isLastChild() {
+        if (!isRoot()) {
+            int parentSize = mParent.children.size();
+            if (parentSize > 0) {
+                final List<DataInfo> parentChildren = mParent.children;
+                return parentChildren.get(parentSize - 1).mId == mId;
+            }
+        }
+        return false;
+    }
+
+    public DataInfo setClickListener(TreeNodeClickListener listener) {
+        mClickListener = listener;
+        return this;
+    }
+
+    public TreeNodeClickListener getClickListener() {
+        return this.mClickListener;
+    }
+
+    public DataInfo setLongClickListener(TreeNodeLongClickListener listener) {
+        mLongClickListener = listener;
+        return this;
+    }
+
+    public TreeNodeLongClickListener getLongClickListener() {
+        return mLongClickListener;
+    }
+
+    public boolean isFirstChild() {
+        if (!isRoot()) {
+            List<DataInfo> parentChildren = mParent.children;
+            return parentChildren.get(0).mId == mId;
+        }
+        return false;
+    }
+
+    public boolean isRoot() {
+        return mParent == null;
+    }
+
+    public DataInfo getRoot() {
+        DataInfo root = this;
+        while (root.mParent != null) {
+            root = root.mParent;
+        }
+        return root;
+    }
+
+    @Override
+    public int compareTo(@NonNull DataInfo dataInfo) {
+        return 0;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type=type;
+    }
+
+    public interface TreeNodeClickListener {
+        void onClick(DataInfo node, Object value);
+    }
+
+    public interface TreeNodeLongClickListener {
+        boolean onLongClick(DataInfo node, Object value);
+    }
+
 }
