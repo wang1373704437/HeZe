@@ -43,6 +43,11 @@
             android:screenOrientation="landscape"
             android:theme="@style/IMTheme.Transparent" />
         <activity
+            android:name=".WxImageLookActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/IMTheme.Transparent" />
+        <activity
             android:name=".TestActivity"
             android:screenOrientation="landscape" />
         <activity

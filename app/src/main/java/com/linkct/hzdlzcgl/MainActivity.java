@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String mtLogPath;
     private String optPath;
     private String svmPath;
+    private String wxImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mtLogPath=FileUtils.DB_PATH+"mtLog.csv";//维修记录
         optPath=FileUtils.DB_PATH+"opt.csv";//操作记录
         svmPath=FileUtils.DB_PATH+"svm.csv";//定值单
-
+        wxImage=FileUtils.DB_PATH+"wt.csv";//维修记录图片模式
 
         updateDate = CsvUtils.getVersion(getApplicationContext(),dbPath);
         Log.e("CsvUtils","资源文件****====="+dbPath);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FileUtils.initPath();
                     clearImageDiskCache(getApplication());
 
-                    CsvUtils.getCSV(getApplicationContext(),dbPath,mtLogPath,optPath,svmPath);
+                    CsvUtils.getCSV(getApplicationContext(),dbPath,mtLogPath,optPath,svmPath,wxImage);
                     Log.e(TAG, "运行在什么线程" + Thread.currentThread().getName());
                     e.onNext("action");
                     Thread.sleep(1500);

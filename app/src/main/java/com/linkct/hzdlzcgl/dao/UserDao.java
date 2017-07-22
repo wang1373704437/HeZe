@@ -9,6 +9,7 @@ import com.linkct.hzdlzcgl.domain.CzpInfo;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.domain.DzdInfo;
 import com.linkct.hzdlzcgl.domain.ImageInfo;
+import com.linkct.hzdlzcgl.domain.WxImageInfo;
 import com.linkct.hzdlzcgl.domain.WxjlInfo;
 
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class UserDao {
     private Dao<CzpInfo, Integer> czPDaoOpe;//操作记录
     private Dao<DzdInfo, Integer> dzdDaoOpe;//定值单
     private Dao<ImageInfo, Integer> imageDaoOpe;//图片数据库
+    private Dao<WxImageInfo, Integer> wxImageDaoOpe;//图片数据库
     private OrmliteTest helper;
 
     public UserDao() {
@@ -37,6 +39,7 @@ public class UserDao {
             czPDaoOpe = helper.getDao(CzpInfo.class);
             dzdDaoOpe = helper.getDao(DzdInfo.class);
             imageDaoOpe = helper.getDao(ImageInfo.class);
+            wxImageDaoOpe = helper.getDao(WxImageInfo.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,6 +53,7 @@ public class UserDao {
             czPDaoOpe.queryRaw("delete from tb_czp");
             dzdDaoOpe.queryRaw("delete from tb_dzd");
             imageDaoOpe.queryRaw("delete from tb_image");
+            wxImageDaoOpe.queryRaw("delete from tb_wx_image");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -204,6 +208,35 @@ public class UserDao {
     }
 
     /**
+     * 检修记录图片
+     * @param uuid
+     * @return
+     */
+    public List<WxImageInfo> listWXImagesByUuid(String uuid) {
+        try {
+            return wxImageDaoOpe.queryBuilder().orderBy("date", true).where().eq("uuid", uuid)
+                    .query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 检修记录图片
+     * @param uuid
+     * @return
+     */
+    public List<WxImageInfo> listWXImagesjlByUuid(String uuid) {
+        try {
+            return wxImageDaoOpe.queryBuilder().groupBy("wximageid").orderBy("date", false).where().eq("uuid", uuid)
+                    .query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * false 降序
      * @param uuid
      * @return
@@ -262,5 +295,32 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void addWxImageList(final List<WxImageInfo> dzdList) {
+        try {
+            TransactionManager.callInTransaction(helper.getConnectionSource(),
+                    new Callable<Void>() {
+                        @Override
+                        public Void call() throws Exception {
+                            for (WxImageInfo dzd : dzdList) {
+                                wxImageDaoOpe.createOrUpdate(dzd);
+                            }
+                            return null;
+                        }
+                    });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<WxImageInfo> listWXImagesjlByid(String wximageid) {
+
+        try {
+            return wxImageDaoOpe.queryBuilder().orderBy("date", false).where().eq("wximageid", wximageid)
+                    .query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

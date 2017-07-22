@@ -9,6 +9,7 @@ import com.linkct.hzdlzcgl.domain.CzpInfo;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.domain.DzdInfo;
 import com.linkct.hzdlzcgl.domain.ImageInfo;
+import com.linkct.hzdlzcgl.domain.WxImageInfo;
 import com.linkct.hzdlzcgl.domain.WxjlInfo;
 
 import java.io.BufferedReader;
@@ -72,7 +73,7 @@ public class CsvUtils {
         return flag;
     }
 
-    public static void getCSV(Context context, String csvPath, String mtLogPath, String optPath, String svmPath) {
+    public static void getCSV(Context context, String csvPath, String mtLogPath, String optPath, String svmPath,String wxImage) {
         ArrayList<DataInfo> dataLists = new ArrayList<DataInfo>();
         UserDao user = new UserDao(context);
         user.cleanALL();
@@ -81,6 +82,7 @@ public class CsvUtils {
             File mtLogFile = new File(mtLogPath);//检修记录
             File optFile = new File(optPath);//操作记录
             File svmFile = new File(svmPath);//定值单
+            File wxImageFile = new File(wxImage);//定值单
 
             if (!csvFile.exists()) {
                 return;
@@ -143,12 +145,55 @@ public class CsvUtils {
             if (svmFile.exists()) {//定值单
                 insersvm(user,svmFile);
             }
+            if (wxImageFile.exists()) {//定值单
+                inserWXimage(user,wxImageFile);
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void inserWXimage(UserDao user, File svmFile) throws Exception {
+
+        DataInputStream in = new DataInputStream(new FileInputStream(svmFile));
+        BufferedReader br = new BufferedReader(new InputStreamReader(in, CodingFormat));
+        String line = "";
+        ArrayList<WxImageInfo> lists = new ArrayList<WxImageInfo>();//设备列表
+        while ((line = br.readLine()) != null) {//一次一行，lists.size()=14,28,42...
+            // 把一行数据分割成多个字段
+            String[] arr = line.split(",");
+            for (int w = 0; w < arr.length; w++) {
+                if (arr[w].equals("*")) {
+                    arr[w] = "";
+                }
+            }
+            if (arr.length >= 4) {
+                WxImageInfo data = new WxImageInfo();
+
+                data.setWximageid(arr[0]);
+                String time=arr[1];
+                if (time.length() > 2)
+                    data.setDate(time.substring(0, time.length() - 2));
+                else
+                    data.setDate(time);
+                data.setPeopleName(arr[2]);
+                data.setUuid(arr[3]);
+
+                for(int m=4;m<arr.length;m++){
+                    WxImageInfo dataNew = new WxImageInfo();
+                    dataNew.setWximageid(data.getWximageid());
+                    dataNew.setUuid(data.getUuid());
+                    dataNew.setDate(data.getDate());
+                    dataNew.setPeopleName(data.getPeopleName());
+                    dataNew.setPath(arr[m]);
+                    lists.add(dataNew);
+                }
+            }
+        }
+        user.addWxImageList(lists);
     }
 
     /**

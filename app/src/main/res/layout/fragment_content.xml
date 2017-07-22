@@ -34,11 +34,11 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/bn_item3"
+            android:id="@+id/bn_item2_2"
             android:layout_width="110dp"
             android:layout_marginLeft="16dp"
             android:layout_height="130dp"
-            android:background="@drawable/icon_03"
+            android:background="@drawable/icon02_2"
             android:gravity="center"
             android:textColor="@color/color4"
             android:textSize="14sp" />
@@ -53,11 +53,21 @@
 
 
         <Button
+            android:id="@+id/bn_item3"
+            android:layout_width="110dp"
+            android:layout_height="130dp"
+            android:background="@drawable/icon_03"
+            android:gravity="center"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
+
+        <Button
             android:id="@+id/bn_item4"
             android:layout_width="110dp"
             android:layout_height="130dp"
             android:background="@drawable/icon_04"
             android:gravity="center"
+            android:layout_marginLeft="16dp"
             android:textColor="@color/color4"
             android:textSize="14sp" />
 
@@ -65,18 +75,8 @@
             android:id="@+id/bn_item5"
             android:layout_width="110dp"
             android:layout_height="130dp"
+            android:layout_marginLeft="16dp"
             android:background="@drawable/icon_05"
-            android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:textColor="@color/color4"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/bn_item6"
-            android:layout_width="110dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/icon_06"
             android:gravity="center"
             android:textColor="@color/color4"
             android:textSize="14sp" />
@@ -86,10 +86,17 @@
     <LinearLayout
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="130dp"
         android:layout_marginTop="25dp"
         android:orientation="horizontal">
-
+        <Button
+            android:id="@+id/bn_item6"
+            android:layout_width="110dp"
+            android:layout_height="130dp"
+            android:background="@drawable/icon_06"
+            android:gravity="center"
+            android:textColor="@color/color4"
+            android:textSize="14sp" />
 
 
     </LinearLayout>

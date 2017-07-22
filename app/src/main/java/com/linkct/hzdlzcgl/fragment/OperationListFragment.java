@@ -15,6 +15,7 @@ import com.linkct.hzdlzcgl.fragment.subfragment.OptItem3Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem4Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem5Fragment;
 import com.linkct.hzdlzcgl.fragment.subfragment.OptItem6Fragment;
+import com.linkct.hzdlzcgl.fragment.subfragment.OptItemWXImageFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
@@ -33,6 +34,7 @@ public class OperationListFragment extends SupportFragment implements View.OnCli
     private Button bn_item3;
     private Button bn_item4;
     private Button bn_item5;
+    private Button bn_item2_2;
 
     public static OperationListFragment newInstance(String menu) {
 
@@ -74,6 +76,7 @@ public class OperationListFragment extends SupportFragment implements View.OnCli
         bn_item4 = (Button) view.findViewById(R.id.bn_item4);
         bn_item5 = (Button) view.findViewById(R.id.bn_item5);
         bn_item6 = (Button) view.findViewById(R.id.bn_item6);
+        bn_item2_2 = (Button) view.findViewById(R.id.bn_item2_2);
 
         bn_item1.setOnClickListener(this);
         bn_item2.setOnClickListener(this);
@@ -81,6 +84,7 @@ public class OperationListFragment extends SupportFragment implements View.OnCli
         bn_item4.setOnClickListener(this);
         bn_item5.setOnClickListener(this);
         bn_item6.setOnClickListener(this);
+        bn_item2_2.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +124,11 @@ public class OperationListFragment extends SupportFragment implements View.OnCli
             case R.id.bn_item6:
                 if (getParentFragment() instanceof DataListFragment) {
                     ((DataListFragment) getParentFragment()).start(OptItem6Fragment.newInstance(uuid));
+                }
+                break;
+            case R.id.bn_item2_2:
+                if (getParentFragment() instanceof DataListFragment) {
+                    ((DataListFragment) getParentFragment()).start(OptItemWXImageFragment.newInstance(uuid));
                 }
                 break;
         }

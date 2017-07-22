@@ -11,6 +11,7 @@ import com.linkct.hzdlzcgl.domain.CzpInfo;
 import com.linkct.hzdlzcgl.domain.DataInfo;
 import com.linkct.hzdlzcgl.domain.DzdInfo;
 import com.linkct.hzdlzcgl.domain.ImageInfo;
+import com.linkct.hzdlzcgl.domain.WxImageInfo;
 import com.linkct.hzdlzcgl.domain.WxjlInfo;
 
 import java.sql.SQLException;
@@ -35,6 +36,7 @@ public class OrmliteTest extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, CzpInfo.class);
 			TableUtils.createTable(connectionSource, DzdInfo.class);
 			TableUtils.createTable(connectionSource, ImageInfo.class);
+			TableUtils.createTable(connectionSource, WxImageInfo.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
